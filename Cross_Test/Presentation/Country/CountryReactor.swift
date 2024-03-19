@@ -56,10 +56,23 @@ final class CountryReactor: Reactor {
         return newState
     }
     
+    @MainActor
     func fetchCountries() {
         Task {
             let result = try await countryUseCase.getCountries()
-            action.onNext(.getCountries(result.data.countryConfigure))
+            var countries: [CountryConfigure] = []
+            var bookmarkedCountries: [CountryConfigure] = []
+            
+            for country in result.data.countryConfigure {
+                if checkBookmarkedCountry(country: country).isEmpty {
+                    countries.append(country)
+                } else {
+                    bookmarkedCountries.append(country)
+                }
+            }
+            
+            bookmarkedCountries.append(contentsOf: countries)
+            action.onNext(.getCountries(bookmarkedCountries))
         }
     }
     
