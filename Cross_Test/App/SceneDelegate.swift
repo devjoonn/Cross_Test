@@ -15,8 +15,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let scene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: scene)
         
-        let viewController = CountryViewController()
-        window?.rootViewController = UINavigationController(rootViewController: viewController)
+        let countryRepository = CountryRepository()
+        let countryUseCase = CountryUseCaseImp(countryRepository: countryRepository)
+        let countryReactor = CountryReactor(countryUseCase: countryUseCase)
+        let countryViewController = CountryViewController(reactor: countryReactor)
+        window?.rootViewController = UINavigationController(rootViewController: countryViewController)
         window?.makeKeyAndVisible()
     }
 

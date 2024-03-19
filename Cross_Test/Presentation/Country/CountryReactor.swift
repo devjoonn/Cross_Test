@@ -11,41 +11,53 @@ import ReactorKit
 import RxSwift
 import RxCocoa
 
-public final class CountryReactor: Reactor {
+final class CountryReactor: Reactor {
     
-    public enum Action {
-        
+    enum Action {
+        case getCountries([CountryConfigure])
     }
     
-    public enum Mutation {
-        
+    enum Mutation {
+        case getCountries([CountryConfigure])
     }
     
-    public struct State {
-        
+    struct State {
+        var countries: [CountryConfigure] = .init()
     }
     
-    public var initialState: State
+    var initialState: State
+    private let countryUseCase: CountryUseCase
     
-    public init() {
+    
+    init(countryUseCase: CountryUseCase) {
+        self.countryUseCase = countryUseCase
         self.initialState = State()
     }
     
     // MARK: - Mutate
-    public func mutate(action: Action) -> Observable<Mutation> {
+    func mutate(action: Action) -> Observable<Mutation> {
         switch action {
-            
+        case .getCountries(let countries):
+            return .just(.getCountries(countries))
         }
     }
     
     // MARK: - Reduce
-    public func reduce(state: State, mutation: Mutation) -> State {
+    func reduce(state: State, mutation: Mutation) -> State {
         var newState = state
         
         switch mutation {
-            
+        case .getCountries(let countries):
+            newState.countries = countries
         }
         
         return newState
+    }
+    
+    func fetchCountries() {
+        Task {
+            let result = try await countryUseCase.getCountries()
+            action.onNext(.getCountries(result.data.countryConfigure))
+        }
     }
 }

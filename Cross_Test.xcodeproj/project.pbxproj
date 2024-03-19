@@ -29,6 +29,7 @@
 		478ED7B52BA95E98008D54E7 /* CountryRepositoryInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478ED7B42BA95E98008D54E7 /* CountryRepositoryInterface.swift */; };
 		478ED7B82BA95F21008D54E7 /* CountryRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478ED7B72BA95F21008D54E7 /* CountryRepository.swift */; };
 		478ED7BA2BA965AA008D54E7 /* CurrencyResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478ED7B92BA965AA008D54E7 /* CurrencyResponse.swift */; };
+		478ED7BD2BA96C2D008D54E7 /* CountryUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478ED7BC2BA96C2D008D54E7 /* CountryUseCase.swift */; };
 		47AC05652BA89F2E000677BD /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = 47AC05642BA89F2E000677BD /* RxCocoa */; };
 		47AC05672BA89F2E000677BD /* RxCocoa-Dynamic in Frameworks */ = {isa = PBXBuildFile; productRef = 47AC05662BA89F2E000677BD /* RxCocoa-Dynamic */; };
 		47AC05692BA89F2E000677BD /* RxRelay in Frameworks */ = {isa = PBXBuildFile; productRef = 47AC05682BA89F2E000677BD /* RxRelay */; };
@@ -56,6 +57,7 @@
 		478ED7B42BA95E98008D54E7 /* CountryRepositoryInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryRepositoryInterface.swift; sourceTree = "<group>"; };
 		478ED7B72BA95F21008D54E7 /* CountryRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryRepository.swift; sourceTree = "<group>"; };
 		478ED7B92BA965AA008D54E7 /* CurrencyResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyResponse.swift; sourceTree = "<group>"; };
+		478ED7BC2BA96C2D008D54E7 /* CountryUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryUseCase.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -124,6 +126,7 @@
 		477F37F42BA7FA8700AFC8D0 /* Domain */ = {
 			isa = PBXGroup;
 			children = (
+				478ED7BB2BA96C1C008D54E7 /* UseCase */,
 				478ED7B32BA95E84008D54E7 /* RepositoryInterface */,
 				478ED7A22BA9454F008D54E7 /* Entities */,
 			);
@@ -223,6 +226,14 @@
 				478ED7B72BA95F21008D54E7 /* CountryRepository.swift */,
 			);
 			path = Repository;
+			sourceTree = "<group>";
+		};
+		478ED7BB2BA96C1C008D54E7 /* UseCase */ = {
+			isa = PBXGroup;
+			children = (
+				478ED7BC2BA96C2D008D54E7 /* CountryUseCase.swift */,
+			);
+			path = UseCase;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -326,6 +337,7 @@
 				478ED7A72BA94A8F008D54E7 /* CrossAPI.swift in Sources */,
 				478ED7AF2BA9591F008D54E7 /* CountryService.swift in Sources */,
 				478ED7AA2BA94E30008D54E7 /* MoyaProvider+Extensions.swift in Sources */,
+				478ED7BD2BA96C2D008D54E7 /* CountryUseCase.swift in Sources */,
 				478ED7B82BA95F21008D54E7 /* CountryRepository.swift in Sources */,
 				477F37BD2BA7E9FA00AFC8D0 /* SceneDelegate.swift in Sources */,
 				477F37FC2BA7FB5E00AFC8D0 /* CountryReactor.swift in Sources */,

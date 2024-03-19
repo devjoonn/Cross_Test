@@ -21,6 +21,7 @@ final class CountryTableView: UITableView {
     private func setView() {
         register(CountryTableViewCell.self, forCellReuseIdentifier: CountryTableViewCell.identifier)
         separatorInset.left = 0
+        showsVerticalScrollIndicator = false
         rowHeight = 50
     }
 }

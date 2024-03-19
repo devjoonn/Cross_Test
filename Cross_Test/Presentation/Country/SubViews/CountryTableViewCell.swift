@@ -12,7 +12,7 @@ import RxCocoa
 import SnapKit
 
 protocol CountryTableViewCellDelegate: AnyObject {
-    func checkedButtonTapped()
+    func starButtonTapped()
 }
 
 class CountryTableViewCell: UITableViewCell {
@@ -24,14 +24,13 @@ class CountryTableViewCell: UITableViewCell {
         }
     }
     
-//    var country: Country? {
-//        didSet {
-//            configure()
-//        }
-//    }
+    var country: CountryConfigure? {
+        didSet {
+            configure()
+        }
+    }
     
     private let countryNameLabel: UILabel = {
-        $0.text = "베트남"
         $0.font = .preferredFont(forTextStyle: .body)
         return $0
     }(UILabel())
@@ -89,7 +88,9 @@ class CountryTableViewCell: UITableViewCell {
     }
     
     func configure() {
+        guard let country else { return }
         
+        countryNameLabel.text = country.name
     }
     
     // MARK: - Action
@@ -97,8 +98,9 @@ class CountryTableViewCell: UITableViewCell {
         starButton.rx.tap
             .bind { [weak self] _ in
                 guard let self = self else { return }
-                self.delegate?.checkedButtonTapped()
+                self.delegate?.starButtonTapped()
                 self.checkedButtonSelected.toggle()
-            }.disposed(by: disposeBag)
+            }
+            .disposed(by: disposeBag)
     }
 }
