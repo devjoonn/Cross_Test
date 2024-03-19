@@ -60,19 +60,14 @@ final class CountryReactor: Reactor {
     func fetchCountries() {
         Task {
             let result = try await countryUseCase.getCountries()
-            var countries: [CountryConfigure] = []
-            var bookmarkedCountries: [CountryConfigure] = []
+            // API 호출 결과에서 DB에 저장된 국가, 저장되지 않은 국가
+            let bookmarkedCountries = result.data.countryConfigure.filter { !checkBookmarkedCountry(country: $0).isEmpty }
+            let unbookmarkedCountries = result.data.countryConfigure.filter { checkBookmarkedCountry(country: $0).isEmpty }
             
-            for country in result.data.countryConfigure {
-                if checkBookmarkedCountry(country: country).isEmpty {
-                    countries.append(country)
-                } else {
-                    bookmarkedCountries.append(country)
-                }
-            }
-            
-            bookmarkedCountries.append(contentsOf: countries)
-            action.onNext(.getCountries(bookmarkedCountries))
+            // 저장된 국가들을 날짜순으로 정렬
+            let sortedBookmarkedCountries = sortCountryByDate(bookmarkedCountries: bookmarkedCountries)
+            let sortedCountries = sortedBookmarkedCountries + unbookmarkedCountries
+            action.onNext(.getCountries(sortedCountries))
         }
     }
     
@@ -100,5 +95,19 @@ final class CountryReactor: Reactor {
     
     func checkBookmarkedCountry(country: CountryConfigure) -> Results<Country> {
         return realm.objects(Country.self).filter("name = '\(country.name)'")
+    }
+    
+    func sortCountryByDate(bookmarkedCountries: [CountryConfigure]) -> [CountryConfigure] {
+        let sortedCountries = realm.objects(Country.self).sorted(byKeyPath: "date")
+        var sortedBookmarkedCountries: [CountryConfigure] = []
+        
+        for sortedCountry in sortedCountries {
+            // DB 날짜 순 정렬된 국가와 API 호출 시 DB에 저장되어 분류된 국가의 이름을 비교하여 매칭된 CountryConfigure를 저장해 return
+            if let matchedCountry = bookmarkedCountries.first(where: { $0.name == sortedCountry.name }) {
+                sortedBookmarkedCountries.append(matchedCountry)
+            }
+        }
+        
+        return sortedBookmarkedCountries
     }
 }
