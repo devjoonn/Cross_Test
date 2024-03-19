@@ -9,6 +9,7 @@ import UIKit
 
 import ReactorKit
 import RxSwift
+import RxCocoa
 import SnapKit
 
 final class CountryViewController: UIViewController {
@@ -17,6 +18,7 @@ final class CountryViewController: UIViewController {
     var disposeBag = DisposeBag()
     
     // MARK: - Properties
+    private let refreshControl = UIRefreshControl()
     private let countryTableView = CountryTableView()
     
     // MARK: - Life Cycles
@@ -43,6 +45,7 @@ final class CountryViewController: UIViewController {
         navigationController?.isNavigationBarHidden = true
         countryTableView.delegate = self
         countryTableView.dataSource = self
+        countryTableView.refreshControl = refreshControl
     }
     
     private func setLayout() {
@@ -84,7 +87,12 @@ extension CountryViewController: View {
     }
 
     func bindAction(reactor: CountryReactor) {
-
+        refreshControl.rx.controlEvent(.valueChanged)
+            .observe(on: MainScheduler.instance)
+            .bind { [weak self] _ in
+                self?.reactor.fetchCountries()
+            }
+            .disposed(by: disposeBag)
     }
 
     func bindState(reactor: CountryReactor) {
@@ -93,6 +101,7 @@ extension CountryViewController: View {
             .observe(on: MainScheduler.instance)
             .bind { [weak self] countries in
                 self?.countryTableView.reloadData()
+                self?.refreshControl.endRefreshing()
             }
             .disposed(by: disposeBag)
     }
