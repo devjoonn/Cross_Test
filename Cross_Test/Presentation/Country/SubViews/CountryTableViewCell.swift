@@ -12,7 +12,7 @@ import RxCocoa
 import SnapKit
 
 protocol CountryTableViewCellDelegate: AnyObject {
-    func starButtonTapped()
+    func starButtonTapped(country: CountryConfigure)
 }
 
 class CountryTableViewCell: UITableViewCell {
@@ -97,8 +97,9 @@ class CountryTableViewCell: UITableViewCell {
     private func bind() {
         starButton.rx.tap
             .bind { [weak self] _ in
-                guard let self = self else { return }
-                self.delegate?.starButtonTapped()
+                guard let self = self,
+                let country = self.country else { return }
+                self.delegate?.starButtonTapped(country: country)
                 self.checkedButtonSelected.toggle()
             }
             .disposed(by: disposeBag)

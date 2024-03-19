@@ -12,7 +12,5 @@ class Country: Object {
     @Persisted(primaryKey: true) var name: String
     @Persisted var platformId: Int
     @Persisted var sendingAmount: Int
-    @Persisted var receivingAmount: Int
-    @Persisted var serviceRate: Double
-    @Persisted var currency: String
+    @Persisted var date: Date
 }

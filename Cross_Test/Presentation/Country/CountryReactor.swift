@@ -10,6 +10,7 @@ import UIKit
 import ReactorKit
 import RxSwift
 import RxCocoa
+import RealmSwift
 
 final class CountryReactor: Reactor {
     
@@ -26,12 +27,14 @@ final class CountryReactor: Reactor {
     }
     
     var initialState: State
+    private let realm: Realm
     private let countryUseCase: CountryUseCase
     
     
     init(countryUseCase: CountryUseCase) {
         self.countryUseCase = countryUseCase
         self.initialState = State()
+        self.realm = try! Realm()
     }
     
     // MARK: - Mutate
@@ -58,6 +61,28 @@ final class CountryReactor: Reactor {
         Task {
             let result = try await countryUseCase.getCountries()
             action.onNext(.getCountries(result.data.countryConfigure))
+        }
+    }
+    
+    func bookmarkCountry(country: CountryConfigure) {
+        let checkedCountryData = realm.objects(Country.self).filter("name = '\(country.name)'")
+        
+        if checkedCountryData.isEmpty {
+            // realm 즐겨찾기 데이터 추가
+            let newCountry = Country()
+            newCountry.name = country.name
+            newCountry.platformId = country.platformID
+            newCountry.sendingAmount = 1000000
+            newCountry.date = Date()
+            
+            try! realm.write {
+                realm.add(newCountry)
+            }
+            // 데이터 삭제
+        } else {
+            try! realm.write {
+                realm.delete(checkedCountryData)
+            }
         }
     }
 }

@@ -96,7 +96,7 @@ extension CountryViewController: View {
 
 // MARK: - StarButton을 눌렀을 때
 extension CountryViewController: CountryTableViewCellDelegate {
-    func starButtonTapped() {
-        
+    func starButtonTapped(country: CountryConfigure) {
+        reactor.bookmarkCountry(country: country)
     }
 }
