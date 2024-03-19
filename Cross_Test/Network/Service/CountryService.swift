@@ -43,7 +43,7 @@ extension CountryService: TargetType {
                 "quote_type": "send"
             ]
             
-            return .requestParameters(parameters: param, encoding: JSONEncoding.default)
+            return .requestParameters(parameters: param, encoding: URLEncoding.queryString)
         }
     }
     
