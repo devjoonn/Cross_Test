@@ -18,9 +18,9 @@ protocol CountryTableViewCellDelegate: AnyObject {
 class CountryTableViewCell: UITableViewCell {
     static let identifier = "CountryTableViewCell"
     
-    var checkedButtonSelected: Bool = false {
+    var starButtonSelected: Bool = false {
         didSet {
-            starButton.isSelected = checkedButtonSelected
+            starButton.isSelected = starButtonSelected
         }
     }
     
@@ -59,7 +59,7 @@ class CountryTableViewCell: UITableViewCell {
     
     override func prepareForReuse() {
         countryNameLabel.text = ""
-        checkedButtonSelected = false
+        starButtonSelected = false
     }
     
     // MARK: - Set UI
@@ -100,7 +100,7 @@ class CountryTableViewCell: UITableViewCell {
                 guard let self = self,
                 let country = self.country else { return }
                 self.delegate?.starButtonTapped(country: country)
-                self.checkedButtonSelected.toggle()
+                self.starButtonSelected.toggle()
             }
             .disposed(by: disposeBag)
     }

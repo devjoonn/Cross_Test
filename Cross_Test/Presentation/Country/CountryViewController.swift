@@ -66,6 +66,10 @@ extension CountryViewController: UITableViewDelegate, UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: CountryTableViewCell.identifier, for: indexPath) as? CountryTableViewCell else { return UITableViewCell() }
         let country = reactor.currentState.countries[indexPath.row]
         
+        if !reactor.checkBookmarkedCountry(country: country).isEmpty {
+            cell.starButtonSelected = true
+        }
+        
         cell.delegate = self
         cell.country = country
         return cell
