@@ -52,7 +52,7 @@ final class CurrencyViewController: UIViewController {
     
     // MARK: - Set UI
     private func setView() {
-        view.backgroundColor = .white
+        view.backgroundColor = .systemBackground
     }
     
     private func setLayout() {
