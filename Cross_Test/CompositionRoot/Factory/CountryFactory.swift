@@ -9,6 +9,7 @@ import UIKit
 
 protocol CountryFactory {
     func createCountryViewController(coordinator: CountryCoordinator) -> UIViewController
+    func createCurrencyViewController(country: CountryConfigure, coordinator: CountryCoordinator) -> UIViewController
 }
 
 struct CountryFactoryImp: CountryFactory {
@@ -16,7 +17,11 @@ struct CountryFactoryImp: CountryFactory {
         let countryRepository = CountryRepository()
         let countryUseCase = CountryUseCaseImp(countryRepository: countryRepository)
         let countryReactor = CountryReactor(countryUseCase: countryUseCase)
-        let countryViewController = CountryViewController(reactor: countryReactor)
+        let countryViewController = CountryViewController(reactor: countryReactor, coordinator: coordinator)
         return countryViewController
+    }
+    
+    func createCurrencyViewController(country: CountryConfigure, coordinator: CountryCoordinator) -> UIViewController {
+        return CurrencyViewController()
     }
 }

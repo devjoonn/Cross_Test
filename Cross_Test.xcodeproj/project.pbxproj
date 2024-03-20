@@ -36,6 +36,7 @@
 		478ED7CA2BA98A10008D54E7 /* CountryFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478ED7C92BA98A10008D54E7 /* CountryFactory.swift */; };
 		478ED7CD2BA98A99008D54E7 /* CountryCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478ED7CC2BA98A99008D54E7 /* CountryCoordinator.swift */; };
 		478ED7D02BA9B48B008D54E7 /* Country.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478ED7CF2BA9B48B008D54E7 /* Country.swift */; };
+		478ED7D32BAA82D3008D54E7 /* CurrencyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478ED7D22BAA82D3008D54E7 /* CurrencyViewController.swift */; };
 		47AC05652BA89F2E000677BD /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = 47AC05642BA89F2E000677BD /* RxCocoa */; };
 		47AC05672BA89F2E000677BD /* RxCocoa-Dynamic in Frameworks */ = {isa = PBXBuildFile; productRef = 47AC05662BA89F2E000677BD /* RxCocoa-Dynamic */; };
 		47AC05692BA89F2E000677BD /* RxRelay in Frameworks */ = {isa = PBXBuildFile; productRef = 47AC05682BA89F2E000677BD /* RxRelay */; };
@@ -70,6 +71,7 @@
 		478ED7C92BA98A10008D54E7 /* CountryFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryFactory.swift; sourceTree = "<group>"; };
 		478ED7CC2BA98A99008D54E7 /* CountryCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryCoordinator.swift; sourceTree = "<group>"; };
 		478ED7CF2BA9B48B008D54E7 /* Country.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Country.swift; sourceTree = "<group>"; };
+		478ED7D22BAA82D3008D54E7 /* CurrencyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -150,6 +152,7 @@
 			isa = PBXGroup;
 			children = (
 				477F37F82BA7FB3B00AFC8D0 /* Country */,
+				478ED7D12BAA82BD008D54E7 /* Currency */,
 			);
 			path = Presentation;
 			sourceTree = "<group>";
@@ -294,6 +297,14 @@
 			path = DTO;
 			sourceTree = "<group>";
 		};
+		478ED7D12BAA82BD008D54E7 /* Currency */ = {
+			isa = PBXGroup;
+			children = (
+				478ED7D22BAA82D3008D54E7 /* CurrencyViewController.swift */,
+			);
+			path = Currency;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -394,6 +405,7 @@
 				477F38012BA8202400AFC8D0 /* CountryTableViewCell.swift in Sources */,
 				478ED7D02BA9B48B008D54E7 /* Country.swift in Sources */,
 				478ED7CD2BA98A99008D54E7 /* CountryCoordinator.swift in Sources */,
+				478ED7D32BAA82D3008D54E7 /* CurrencyViewController.swift in Sources */,
 				477F37FF2BA81FF500AFC8D0 /* CountryTableView.swift in Sources */,
 				478ED7B52BA95E98008D54E7 /* CountryRepositoryInterface.swift in Sources */,
 				477F37BF2BA7E9FA00AFC8D0 /* CountryViewController.swift in Sources */,

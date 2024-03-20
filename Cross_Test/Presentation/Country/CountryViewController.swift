@@ -15,6 +15,7 @@ import SnapKit
 final class CountryViewController: UIViewController {
 
     private let reactor: CountryReactor
+    private let coordinator: CountryCoordinator
     var disposeBag = DisposeBag()
     
     // MARK: - Properties
@@ -22,8 +23,9 @@ final class CountryViewController: UIViewController {
     private let countryTableView = CountryTableView()
     
     // MARK: - Life Cycles
-    init(reactor: CountryReactor) {
+    init(reactor: CountryReactor, coordinator: CountryCoordinator) {
         self.reactor = reactor
+        self.coordinator = coordinator
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -39,10 +41,13 @@ final class CountryViewController: UIViewController {
         reactor.fetchCountries()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        navigationController?.isNavigationBarHidden = true
+    }
+    
     // MARK: - Set UI
     private func setView() {
         view.backgroundColor = .white
-        navigationController?.isNavigationBarHidden = true
         countryTableView.delegate = self
         countryTableView.dataSource = self
         countryTableView.refreshControl = refreshControl
@@ -76,6 +81,11 @@ extension CountryViewController: UITableViewDelegate, UITableViewDataSource {
         cell.delegate = self
         cell.country = country
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let country = reactor.currentState.countries[indexPath.row]
+        coordinator.startCurrencyViewController(country: country)
     }
 }
 

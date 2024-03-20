@@ -22,3 +22,11 @@ final class CountryCoordinator: Coordinator {
         navigationController.pushViewController(countryController, animated: true)
     }
 }
+
+extension CountryCoordinator {
+    func startCurrencyViewController(country: CountryConfigure) {
+        let currencyViewController = countryFactory.createCurrencyViewController(country: country, coordinator: self)
+        navigationController.isNavigationBarHidden = false
+        navigationController.pushViewController(currencyViewController, animated: true)
+    }
+}
