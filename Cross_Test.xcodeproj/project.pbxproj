@@ -37,6 +37,7 @@
 		478ED7CD2BA98A99008D54E7 /* CountryCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478ED7CC2BA98A99008D54E7 /* CountryCoordinator.swift */; };
 		478ED7D02BA9B48B008D54E7 /* Country.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478ED7CF2BA9B48B008D54E7 /* Country.swift */; };
 		478ED7D32BAA82D3008D54E7 /* CurrencyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478ED7D22BAA82D3008D54E7 /* CurrencyViewController.swift */; };
+		478ED7D52BAA8727008D54E7 /* CurrencyReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478ED7D42BAA8727008D54E7 /* CurrencyReactor.swift */; };
 		47AC05652BA89F2E000677BD /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = 47AC05642BA89F2E000677BD /* RxCocoa */; };
 		47AC05672BA89F2E000677BD /* RxCocoa-Dynamic in Frameworks */ = {isa = PBXBuildFile; productRef = 47AC05662BA89F2E000677BD /* RxCocoa-Dynamic */; };
 		47AC05692BA89F2E000677BD /* RxRelay in Frameworks */ = {isa = PBXBuildFile; productRef = 47AC05682BA89F2E000677BD /* RxRelay */; };
@@ -72,6 +73,7 @@
 		478ED7CC2BA98A99008D54E7 /* CountryCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryCoordinator.swift; sourceTree = "<group>"; };
 		478ED7CF2BA9B48B008D54E7 /* Country.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Country.swift; sourceTree = "<group>"; };
 		478ED7D22BAA82D3008D54E7 /* CurrencyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyViewController.swift; sourceTree = "<group>"; };
+		478ED7D42BAA8727008D54E7 /* CurrencyReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyReactor.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -301,6 +303,7 @@
 			isa = PBXGroup;
 			children = (
 				478ED7D22BAA82D3008D54E7 /* CurrencyViewController.swift */,
+				478ED7D42BAA8727008D54E7 /* CurrencyReactor.swift */,
 			);
 			path = Currency;
 			sourceTree = "<group>";
@@ -398,6 +401,7 @@
 			files = (
 				478ED7C82BA989E3008D54E7 /* AppFactory.swift in Sources */,
 				478ED7C22BA988E4008D54E7 /* Coordinator.swift in Sources */,
+				478ED7D52BAA8727008D54E7 /* CurrencyReactor.swift in Sources */,
 				478ED7AD2BA958A2008D54E7 /* NetworkLogger.swift in Sources */,
 				478ED7C42BA988F4008D54E7 /* AppCoordinator.swift in Sources */,
 				478ED7A42BA94577008D54E7 /* CountryListResponse.swift in Sources */,

@@ -7,12 +7,28 @@
 
 import UIKit
 
+import ReactorKit
+import RxSwift
+import RxCocoa
+import SnapKit
+
 final class CurrencyViewController: UIViewController {
     
+    private let reactor: CurrencyReactor
+    private let coordinator: CountryCoordinator
+    var disposeBag = DisposeBag()
+    
     // MARK: - Properties
+    private let currencyLabel: UILabel = {
+        $0.font = .preferredFont(forTextStyle: .body)
+        $0.textColor = .label
+        return $0
+    }(UILabel())
     
     // MARK: - Life Cycles
-    init() {
+    init(reactor: CurrencyReactor, coordinator: CountryCoordinator) {
+        self.reactor = reactor
+        self.coordinator = coordinator
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -24,14 +40,40 @@ final class CurrencyViewController: UIViewController {
         super.viewDidLoad()
         setView()
         setLayout()
+        bind(reactor: reactor)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        navigationController?.isNavigationBarHidden = false
     }
     
     // MARK: - Set UI
     private func setView() {
-        view.backgroundColor = .blue
+        view.backgroundColor = .white
     }
     
     private func setLayout() {
+        view.addSubview(currencyLabel)
+        
+        currencyLabel.snp.makeConstraints { make in
+            make.center.equalToSuperview()
+        }
+    }
+}
+
+// MARK: - Bind
+extension CurrencyViewController: View {
+    public func bind(reactor: CurrencyReactor) {
+        bindAction(reactor: reactor)
+        bindState(reactor: reactor)
+    }
+
+    func bindAction(reactor: CurrencyReactor) {
+        
+    }
+
+    func bindState(reactor: CurrencyReactor) {
         
     }
 }
+

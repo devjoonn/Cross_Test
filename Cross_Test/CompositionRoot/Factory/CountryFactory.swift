@@ -22,6 +22,10 @@ struct CountryFactoryImp: CountryFactory {
     }
     
     func createCurrencyViewController(country: CountryConfigure, coordinator: CountryCoordinator) -> UIViewController {
-        return CurrencyViewController()
+        let countryRepository = CountryRepository()
+        let countryUseCase = CountryUseCaseImp(countryRepository: countryRepository)
+        let currencyReactor = CurrencyReactor(countryUseCase: countryUseCase, country: country)
+        let currencyViewController = CurrencyViewController(reactor: currencyReactor, coordinator: coordinator)
+        return currencyViewController
     }
 }

@@ -48,6 +48,7 @@ final class CountryViewController: UIViewController {
     // MARK: - Set UI
     private func setView() {
         view.backgroundColor = .white
+        setNavigationBar()
         countryTableView.delegate = self
         countryTableView.dataSource = self
         countryTableView.refreshControl = refreshControl
@@ -61,6 +62,12 @@ final class CountryViewController: UIViewController {
             make.leading.trailing.equalToSuperview().inset(20)
             make.bottom.equalToSuperview()
         }
+    }
+    
+    private func setNavigationBar() {
+        let backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
+        backBarButtonItem.tintColor = .black
+        navigationItem.backBarButtonItem = backBarButtonItem
     }
 }
 
