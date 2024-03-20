@@ -78,8 +78,6 @@ final class CountryReactor: Reactor {
             // realm 즐겨찾기 데이터 추가
             let newCountry = Country()
             newCountry.name = country.name
-            newCountry.platformId = country.platformID
-            newCountry.sendingAmount = 1000000
             newCountry.date = Date()
             
             try! realm.write {

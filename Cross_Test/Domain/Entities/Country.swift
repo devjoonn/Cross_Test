@@ -10,7 +10,5 @@ import RealmSwift
 
 class Country: Object {
     @Persisted(primaryKey: true) var name: String
-    @Persisted var platformId: Int
-    @Persisted var sendingAmount: Int
     @Persisted var date: Date
 }
