@@ -31,7 +31,7 @@ struct CurrencyConfigure: Codable {
     let currency, unavailableReason: String
     let isAvailTransfer: Bool
     let quoteID: String
-    let topupMessage: String
+    let topupMessage: TopupMessage
 
     enum CodingKeys: String, CodingKey {
         case quoteType = "quote_type"
@@ -67,4 +67,10 @@ struct Limit: Codable {
         case maxReceiving = "max_receiving"
         case availReceive = "avail_receive"
     }
+}
+
+// MARK: - TopupMessage
+struct TopupMessage: Codable {
+    let home: String
+    let tooltip: String
 }
