@@ -14,15 +14,16 @@ import RealmSwift
 final class CurrencyReactor: Reactor {
     
     enum Action {
-        
+        case resultCurrency(String)
     }
     
     enum Mutation {
-        
+        case resultCurrency(String)
     }
     
     struct State {
         var country: CountryConfigure
+        var resultCurrency: String = ""
     }
     
     var initialState: State
@@ -37,7 +38,8 @@ final class CurrencyReactor: Reactor {
     // MARK: - Mutate
     func mutate(action: Action) -> Observable<Mutation> {
         switch action {
-            
+        case .resultCurrency(let currency):
+            return .just(.resultCurrency(currency))
         }
     }
     
@@ -46,9 +48,29 @@ final class CurrencyReactor: Reactor {
         var newState = state
         
         switch mutation {
-            
+        case .resultCurrency(let currency):
+            newState.resultCurrency = currency
         }
         
         return newState
+    }
+    
+    @MainActor
+    func fetchCurrency() {
+        Task {
+            let platformId = currentState.country.platformID
+            let result = try await countryUseCase.getCurrency(platformId: platformId)
+            
+            let formattedSendingAmount = formatNumberWithComma(result.data.sendingAmount)
+            let formattedReceivingAmount = formatNumberWithComma(result.data.receivingAmount)
+            let resultCurrency = "\(formattedSendingAmount) KRW = \(formattedReceivingAmount) \(result.data.currency)"
+            action.onNext(.resultCurrency(resultCurrency))
+        }
+    }
+    
+    private func formatNumberWithComma(_ number: Int) -> String {
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .decimal
+        return formatter.string(from: NSNumber(value: number)) ?? ""
     }
 }

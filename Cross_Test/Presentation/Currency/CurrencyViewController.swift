@@ -20,7 +20,9 @@ final class CurrencyViewController: UIViewController {
     
     // MARK: - Properties
     private let currencyLabel: UILabel = {
-        $0.font = .preferredFont(forTextStyle: .body)
+        $0.text = "불러오는 중"
+        $0.font = .preferredFont(forTextStyle: .headline)
+        $0.textAlignment = .center
         $0.textColor = .label
         return $0
     }(UILabel())
@@ -41,6 +43,7 @@ final class CurrencyViewController: UIViewController {
         setView()
         setLayout()
         bind(reactor: reactor)
+        reactor.fetchCurrency()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -57,6 +60,7 @@ final class CurrencyViewController: UIViewController {
         
         currencyLabel.snp.makeConstraints { make in
             make.center.equalToSuperview()
+            make.leading.trailing.equalToSuperview().inset(20)
         }
     }
 }
@@ -64,16 +68,17 @@ final class CurrencyViewController: UIViewController {
 // MARK: - Bind
 extension CurrencyViewController: View {
     public func bind(reactor: CurrencyReactor) {
-        bindAction(reactor: reactor)
         bindState(reactor: reactor)
     }
 
-    func bindAction(reactor: CurrencyReactor) {
-        
-    }
-
     func bindState(reactor: CurrencyReactor) {
-        
+        reactor.state
+            .map { $0.resultCurrency }
+            .observe(on: MainScheduler.instance)
+            .bind { [weak self] currency in
+                self?.currencyLabel.text = currency
+            }
+            .disposed(by: disposeBag)
     }
 }
 
